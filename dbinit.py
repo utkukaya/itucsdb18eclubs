@@ -3,17 +3,13 @@ import sys
 
 import psycopg2 as dbapi2
 
-
-
-
-
 INIT_STATEMENTS = [
     """CREATE TABLE CLUB (
         CLUB_ID SERIAL PRIMARY KEY,
         NAME VARCHAR(40) NOT NULL,     
         FOUNDER VARCHAR(40) NOT NULL,
         NUMBER_MEMBER INTEGER NOT NULL,
-        EMAİL VARCHAR(70) NOT NULL,
+        EMAIL VARCHAR(70) NOT NULL,
         PASSWORD VARCHAR(200) NOT NULL,
         )""",
     """CREATE TABLE STUDENT (
