@@ -51,9 +51,9 @@ def create_app():
     lm.init_app(app)
     lm.login_view = "login_page"
 
-    home_dir = os.path.expanduser("~")
-    db = Database(os.path.join(home_dir, "clubs.db"))
-    app.config["db"] = db
+    #home_dir = os.path.expanduser("~")
+    #db = Database(os.path.join(home_dir, "clubs.db"))
+    #app.config["db"] = db
 
 
     
