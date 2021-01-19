@@ -21,7 +21,7 @@ def load_user(user_id):
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object("settings")
+    app.config.from_object("config")
 
     app.add_url_rule("/", view_func=views.home_page)
     app.add_url_rule("/events", view_func=views.eclubs_page, methods=["GET", "POST"])
@@ -59,7 +59,7 @@ def create_app():
     
     
 #    db = Database()
- #   app.config["db"] = db,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,üüüüüüüüüüüü9666
+ #   app.config["db"] = db
     
     return app
 
