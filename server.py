@@ -10,6 +10,8 @@ import os
 import views
 import forms
 app = Flask(__name__)
+app.secret_key = "super secret key"
+url = os.getenv("DATABASE_URL")
 lm = LoginManager()
 #lm.init_app(app)
 
@@ -43,31 +45,19 @@ def create_app():
     )
     app.add_url_rule("/registerstudent", view_func=views.register_page, methods=["GET", "POST"])
     app.add_url_rule("/registerclub", view_func=views.register_club_page, methods=["GET", "POST"])
-    #@app.route('/register/', methods=["GET","POST"])
-  #  db = Database()
- #   db.add_club(Club("IEEE", "UTKU"))
-#    db.add_club(Club("Dance", "UMUT"))
-#    app.config["db"] = db
     lm.init_app(app)
     lm.login_view = "login_page"
 
     #home_dir = os.path.expanduser("~")
     #db = Database(os.path.join(home_dir, "clubs.db"))
     #app.config["db"] = db
-
-
-    
-    
-#    db = Database()
- #   app.config["db"] = db
-    
     return app
 
 
 if __name__ == "__main__":
     app = create_app()
     port = app.config.get("PORT", 5000)
-    app.run(host="localhost", port=port)
+    app.run(host="127.0.0.1", port=port)
     
     
 
