@@ -1,0 +1,43 @@
+{% extends "server.html" %}
+{% block title %}Edit e-clubs{% endblock %}
+{% block content %}
+    <center>	
+    <h1 class="title">Edit e-clubs</h1>
+
+
+
+<form class="form-style-9" action="" method="post" name="club_edit">
+<ul>
+<li>
+    <label for="title" class="label">Name of the club</label>
+    <input type="text" name="name" class="field-style field-split align" placeholder="Name" required="required"/>
+</li>
+</ul>
+{% if 'name' in values.errors %}
+        <p class="help has-background-warning">
+            {{ values.errors['name'] }}
+        </p>
+        {% endif %}
+
+<li>
+    <ul>
+    <label for="founder" class="label">Founder of Club</label>
+    </ul>
+</li>
+<ul>
+<li>
+<input type="text" name="founder" class="field-style field-split align" placeholder="Founder" required="required"/>
+
+</li>
+</ul>
+{% if 'founder' in values.errors %}
+        <p class="help has-background-warning">
+            {{ values.errors['founder'] }}
+        </p>
+        {% endif %}
+
+   <button>Save</button>
+</form>
+
+
+{% endblock %}

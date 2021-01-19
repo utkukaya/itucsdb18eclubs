@@ -1,0 +1,64 @@
+{% extends "server.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<form class="form-style-10" action="" method="post" name="club_edit">
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <div class="column is-4 is-offset-4">
+            <h3 class="title has-text-grey">Add Events</h3>
+            <div class="box">
+              <form action="" method="post" name="login">
+                {{ form.csrf_token }}
+		<center>
+			
+                <div class="inner-wrap">
+                  <div class="section">Name of Event
+                    {{ form.title(required=True, autofocus=True,
+                                     class='input is-large',
+                                     placeholder='Title of Event') }}
+                  </div>
+                  {% for error in form.title.errors %}
+                    <p class="help has-background-warning">
+                        {{ error }}
+                    </p>
+                  {% endfor %}
+                </div>
+
+                <div class="inner-wrap">
+                  <div class="section">Date of Event
+                    {{ form.date(required=True, class='input is-large',
+                                     placeholder='Date of Event') }}
+                  </div>
+                  {% for error in form.date.errors %}
+                    <p class="help has-background-warning">
+                        {{ error }}
+                    </p>
+                  {% endfor %}
+                </div>
+				<div class="inner-wrap">
+                  <div class="section">Location of Event
+                    {{ form.location(required=True, class='input is-large',
+                                     placeholder='Location of Event') }}
+                  </div>
+                  {% for error in form.location.errors %}
+                    <p class="help has-background-warning">
+                        {{ error }}
+                    </p>
+                  {% endfor %}
+                </div>
+				
+				
+			
+		</center>
+				<center>
+				<input type="submit" name="Sign Up" value="Login"/>
+				</center>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+</form>
+{% endblock %}

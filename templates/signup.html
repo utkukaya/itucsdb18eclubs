@@ -1,0 +1,126 @@
+{% extends "server.html" %}
+{% block title %}Sign Up{% endblock %}
+{% block content %}
+
+<!div class="form-style-10">
+<form class="form-style-10" action="" method="post" name="signup">
+	<h3 class="title has-text-grey">Sign Up For Students</h3>
+    {{ form.csrf_token }}
+	
+      <center>
+        <button class="button-login"><a class="change-button-color" href="{{ url_for('register_page') }}">Sign Up For Students</a></button>
+        <button class="button-signup"><a class="button-color" href="{{ url_for('register_club_page') }}">Sign Up For Clubs</a></button>
+	  </center>
+	
+	<div class="inner-wrap">
+    <div class="section">Your First Name
+	{{ form.firstname(required=True, autofocus=True,
+                                     class='input is-large',
+                                     placeholder='Your First Name') }}
+	</div>
+	</div>
+	<div>
+	{% for error in form.firstname.errors %}
+        <p class="help has-background-warning">
+            {{ error }}
+        </p>
+    {% endfor %}
+	</div>
+	<div class="inner-wrap">
+    <div class="section">Your Surname
+	{{ form.surname(required=True, autofocus=True,
+                                     class='input is-large',
+                                     placeholder='Your Surname') }}
+	</div>
+	</div>
+	<div>
+	{% for error in form.surname.errors %}
+        <p class="help has-background-warning">
+            {{ error }}
+        </p>
+    {% endfor %}
+	</div>
+	<div class="inner-wrap">
+    <div class="section">Your E-Mail
+	{{ form.email(required=True, autofocus=True,
+                                     class='input is-large',
+                                     placeholder='Your E-Mail') }}
+	</div>
+	</div>
+	<div>
+	{% for error in form.email.errors %}
+        <p class="help has-background-warning">
+            {{ error }}
+        </p>
+    {% endfor %}
+	</div>
+	<div class="inner-wrap">
+    <div class="section">Your Department
+	{{ form.department(required=True, autofocus=True,
+                                     class='input is-large',
+                                     placeholder='Your Department') }}
+	</div>
+	</div>
+	<div>
+	{% for error in form.department.errors %}
+        <p class="help has-background-warning">
+            {{ error }}
+        </p>
+    {% endfor %}
+	</div>
+	<div class="inner-wrap">
+	<div class="section">Password
+	{{ form.password(required=True, autofocus=True,
+                                     class='input is-large',
+                                     placeholder='Your Password') }}
+	</div>
+	<div>
+	{% for error in form.password.errors %}
+        <p class="help has-background-warning">
+            {{ error }}
+        </p>
+    {% endfor %}
+	</div>
+	<div class="section">
+	{{ form.password(required=True, autofocus=True,
+                                     class='input is-large',
+                                     placeholder='Repeat Your Password') }}
+	</div>
+	<div>
+	{% for error in form.password.errors %}
+        <p class="help has-background-warning">
+            {{ error }}
+        </p>
+    {% endfor %}
+	</div>
+	</div>
+	
+	
+	<div class="inner-wrap">
+    <div class="section">
+	{{ form.accept_tos(required=True, autofocus=True,
+                                     class='input is-large') }}
+									 You agree to our Terms and Policy.
+	</div>
+	</div>
+	<div>
+	{% for error in form.accept_tos.errors %}
+        <p class="help has-background-warning">
+            {{ error }}
+        </p>
+    {% endfor %}
+	</div>
+	
+	
+   
+   <div class="button-section">
+	<center>
+	<input type="submit" name="Sign Up" value="Sign up"/>
+	</center>
+    
+     
+    </div>
+</form>
+<!/div
+
+{% endblock %}

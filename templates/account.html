@@ -1,0 +1,107 @@
+{% extends "server.html" %}
+{% block title %}Account{% endblock %}
+{% block content %}
+    <h1 class="title">Account</h1>
+    {% if user_email != "" %}
+   
+	<center>
+	
+	<form class="form-style-10" action="" method="post" name="club_list">
+	<table class="table is-striped is-fullwidth">
+      {% if student_user %}
+	  <tr>
+         <td><div class="change-button-color">Your Firstname: </div></td>
+         <td>{{ user.firstname }}</td>
+	  </tr>
+	  <tr>
+		 <td><div class="change-button-color">Your Surname: </div></td>
+		 <td>{{ user.surname }}</td>
+      </tr>
+	  <tr>
+		 <td><div class="change-button-color">Your Email: </div></td>
+         <td>{{ user.email }}</td>		 
+	  </tr>
+	  {% endif %}
+	  {% if club_user %}
+	  <tr>
+         <td><div class="change-button-color">Your Firstname: </div></td>
+         <td>{{ user.name }}</td>
+	  </tr>
+	  <tr>
+		 <td><div class="change-button-color">Your Surname: </div></td>
+		 <td>{{ user.founder }}</td>
+      </tr>
+	  <tr>
+		 <td><div class="change-button-color">Your Email: </div></td>
+         <td>{{ user.email }}</td>		 
+	  </tr>
+	  {% endif %}
+	  </table>
+ 	</form>
+	{% if clubs %}
+	<form class="form-style-10" action="" method="post" name="club_list">
+	<table>
+	<tr>
+		<td><div class="change-button-color">Your Clubs </div></td>
+	
+	{% for club in clubs %}
+		<tr>
+			<td>{{ club.name }}</td>
+		</tr>
+	{% endfor %}
+	</tr>
+	</table>
+	</form>
+	{% endif %}
+	{% if events %}	
+	<form class="form-style-10" action="" method="post" name="club_list">
+	<table>
+	<tr>
+		<td><div class="change-button-color">Your Events </div></td>
+	
+	{% for event in events %}
+		<tr>
+			<td>{{ event.title }}</td>
+		</tr>
+	{% endfor %}
+	</tr>
+	{% endif %}
+	</table>
+	</form>
+	
+	{% if club_user %}
+	<form class="form-style-10" action="" method="post" name="club_list">
+		<div class="button-design">
+		<button>
+		  <a class="button-color" href="{{ url_for('add_event_page') }}">Add The Event</a>
+		</button>
+		</div>
+	</form>
+	{% endif %}
+	{% endif %}
+	{% if user_email != "" %}
+	
+	<form class="form-style-10" action="" method="post" name="club_list">
+	<div class="button-design">
+	<button>   
+      <a class="button-color" href="{{ url_for('logout_page') }}">Log out<a>
+    </button>
+	</div>
+	</form>
+	
+   	</center>
+	{% else %}
+	<center>
+    <div class="button-design">
+	<p>You should log in to display your account</p>
+	<form class="form-style-10" action="" method="post" name="club_list">
+	<button>   
+      <a class="button-color" href="{{ url_for('login_page') }}">Log in</a>
+    </button>
+
+	</form>
+	</div>
+	</center>
+	{% endif %}
+
+{% endblock %}

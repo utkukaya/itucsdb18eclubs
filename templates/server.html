@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>E-clubs - {% block title %}{% endblock %}</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='server.css') }}"/>
+  </head>
+    <center>
+	<img width= 100 height= 100 src="{{url_for('static',filename='logo.png')}}"/>
+	
+     <div class="button-design">
+ 	<button class="button-color">
+ 	 <a class="button-color" href="{{ url_for('home_page')}}">Home</a>
+	</button>   
+    <button>   
+      <a class="button-color" href="{{ url_for('eclub_page') }}">Clubs</a>
+    </button>
+	
+    <button class="button-design">   
+
+      <a class="button-color" href="{{ url_for('events_page') }}">Events</a>
+    </button>
+   
+     
+     <button>   
+
+      <a class="button-color" href="{{ url_for('about_page') }}">About Website</a>
+    </button>
+	<button class="button-color">
+            <a class="button-color" href="{{ url_for('account_page',user_email=user_email) }}">Account</a>
+	</button>
+	
+
+	  
+        
+
+    </div>
+
+    </center>
+
+ <main>
+        {% for message in get_flashed_messages() %}
+        <center>
+		<form class="form-style-10" action="" method="post" name="signup">
+		<div class="notification is-info">{{ message }}</div>
+        </form>
+		</center>
+		{% endfor %}
+
+      <section class="section">
+        <div class="content">
+        </div>
+      </section>
+    </main>
+
+<body>
+   
+    {% block content %}{% endblock %}
+    
+    <footer>
+      <small>&copy; 2015-2018, Kilgore Trout</small>
+    </footer>
+  </body>
+</html>

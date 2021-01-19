@@ -1,0 +1,35 @@
+{% extends "server.html" %}
+{% block title %}Events list{% endblock %}
+{% block content %}
+    <h1 class="title">Events</h1>
+
+    {% if events %}
+	
+     <form class="form-style-10" action="" method="post" name="club_list">
+      <table class="table is-striped is-fullwidth">
+		<center>
+
+		<tr>
+		<td><a class="change-button-color">Title</a></td>
+		<td><a class="change-button-color">Location</a></td>
+		<td><a class="change-button-color">Date</a></td>
+		</tr>
+        {% for event_key, event in events %}
+        <tr>
+          <td>
+			<tr>
+			<td><a class="club-name" href="{{ url_for('an_event_page', event_key = event_key) }}">{{ event.title }}</a></td>
+			<td>{{ event.location }}</td>
+			<td>{{ event.date }} </td>
+			
+			</tr>
+		</center>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+ 
+    </form>
+
+    {% endif %}
+{% endblock %}

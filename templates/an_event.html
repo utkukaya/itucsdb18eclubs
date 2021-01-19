@@ -1,0 +1,116 @@
+{% extends "server.html" %}
+{% block title %}Club list{% endblock %}
+{% block content %}
+    <h1 class="title">Club</h1>
+  
+    {% if event %}
+    
+	<center>
+	<form class="form-style-10" action="" method="post" name="club_list">
+	<table class="table is-striped is-fullwidth">
+      <tr>
+         <td><a class="change-button-color">Name:</a></td>
+		 <td>{{ event.title }}</td>
+	  </tr>
+	  <tr>
+         <td><a class="change-button-color">Founder:</a></td>
+		 <td>{{ event.date }}</td>
+      </tr>
+	  <tr>
+		 <td><a class="change-button-color">Event Id:</a></td>
+         <td>{{ event.event_id }}</td>
+      </tr>
+	  <tr>
+		 <td><a class="change-button-color">Number of Members:</a></td>
+         <td>{{ event.location }}</td>
+      </tr>
+	</table>
+	
+	</form>
+	
+	{% if comments %}
+	<form class="form-style-10" action="" method="post" name="club_list">
+	<table class="table is-striped is-fullwidth">
+      {% for comment_key, comment in comments %}
+	  <tr>
+         <td><a class="change-button-color">Comment:</a></td>
+		 <td>{{ comment.comment }}</td>
+	  </tr>
+	  <tr>
+         <td><a class="change-button-color">Name:</a></td>
+		 <td>{{ comment.name }}</td>
+      </tr>
+	  <tr>
+		 <td><a class="change-button-color">Vote:</a></td>
+         <td>{{ comment.vote }}</td>
+      </tr>
+	  {% endfor %}
+	</table>
+	</form>
+	{% endif %}
+
+	{% if user_email != "" and not club_user  %}
+
+	<form class="form-style-10" action="" method="post" name="club_list">
+	<div class="button-design">
+	<button>   
+
+      <a class="button-color" href="{{ url_for('register_event_page', user_email=user_email, event_key=event.event_id) }}">Register For The Event</a>
+    </button>
+	
+	</div>
+
+	</form>
+
+	{% endif %}
+	<form class="form-style-10" action="" method="post" name="club_list">
+	<div class="inner-wrap">
+        <div class="section">Your Comment
+        {{ form.comment(required=True, autofocus=True,
+		class='input is-large',
+        placeholder='Your Comment') }}
+		</div>
+        {% for error in form.comment.errors %}
+        <p class="help has-background-warning">
+              {{ error }}
+        </p>
+        {% endfor %}
+        </div>
+		<div class="inner-wrap">
+        <div class="section">Your Name
+        {{ form.name(required=True, class='input is-large',
+        placeholder='Your Name') }}
+        </div>
+        {% for error in form.name.errors %}
+        <p class="help has-background-warning">
+           {{ error }}
+        </p>
+        {% endfor %}
+        </div>
+		<div>
+		<div class="inner-wrap">
+        <div class="section">Your Vote
+        {{ form.vote(required=True, class='input is-large',
+        placeholder='Your Vote(1-10)') }}
+        </div>
+        {% for error in form.vote.errors %}
+        <p class="help has-background-warning">
+           {{ error }}
+        </p>
+        {% endfor %}
+
+	</form>
+	{% if user_email != "" and not club_user  %}
+
+	<center>
+	<input type="submit" name="Sign Up" value="Make a Comment"/>
+	</center>
+
+	{% endif %}
+
+
+   	</center>
+
+
+    {% endif %}
+{% endblock %}

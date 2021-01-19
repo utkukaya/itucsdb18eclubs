@@ -1,0 +1,57 @@
+{% extends "server.html" %}
+{% block title %}Club list{% endblock %}
+{% block content %}
+    <h1 class="title">Club</h1>
+  
+    {% if club %}
+    
+	<center>
+	<form class="form-style-10" action="" method="post" name="club_list">
+	<table class="table is-striped is-fullwidth">
+      <tr>
+         <td><a class="change-button-color">Name:</a></td>
+         <td>{{ club.name }}</td>
+	  </tr>
+	  <tr>
+         <td><a class="change-button-color">Founder:</a></td>
+         <td>{{ club.founder }}</td>
+	  </tr>
+	  <tr>
+         <td><a class="change-button-color">Club Id:</a></td>
+         <td>{{ club.club_id }}</td>
+      </tr>
+      <tr>
+         <td><a class="change-button-color">Number of Members:</a></td>
+         <td>{{ club.number_member }}</td>
+      </tr>
+	</table>
+	</form>
+	
+	
+	
+	{% if not club_user %}
+		{% if user_email != ""  %}
+
+		<form class="form-style-10" action="" method="post" name="club_list">
+		<div class="button-design">
+		<button>   
+
+		  <a class="button-color" href="{{ url_for('join_page', club_key = club.club_id, user_email=user_email) }}">Join The Club</a>
+		</button>
+		
+		</div>
+
+		</form>
+		{% endif %}
+
+	{% endif %}
+	
+	
+	
+	
+
+   	</center>
+
+
+    {% endif %}
+{% endblock %}

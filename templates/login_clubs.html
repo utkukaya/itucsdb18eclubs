@@ -1,0 +1,58 @@
+{% extends "server.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<form class="form-style-10" action="" method="post" name="club_edit">
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <div class="column is-4 is-offset-4">
+            <h3 class="title has-text-grey">Login For Clubs</h3>
+            <div class="box">
+              <form action="" method="post" name="login">
+                {{ form.csrf_token }}
+			<center>
+			<button class="button-signup"><a class="button-color" href="{{ url_for('login_page') }}">Log In For Students</a></button>
+			<button class="button-login"><a class="change-button-color" href="{{ url_for('login_clubs_page') }}">Log In For Clubs</a></button>
+			</center>
+		<center>
+			
+                <div class="inner-wrap">
+                  <div class="section">Your E-Mail
+                    {{ form.email(required=True, autofocus=True,
+                                     class='input is-large',
+                                     placeholder='Your E-Mail') }}
+                  </div>
+                  {% for error in form.email.errors %}
+                    <p class="help has-background-warning">
+                        {{ error }}
+                    </p>
+                  {% endfor %}
+                </div>
+
+                <div class="inner-wrap">
+                  <div class="section">Your Password
+                    {{ form.password(required=True, class='input is-large',
+                                     placeholder='Your Password') }}
+                  </div>
+                  {% for error in form.password.errors %}
+                    <p class="help has-background-warning">
+                        {{ error }}
+                    </p>
+                  {% endfor %}
+                </div>
+				<div>
+				If you are not registered, you can 
+				<a href="{{ url_for('register_page') }}">sign up.</a>
+				<div>
+		</center>
+				<center>
+				<input type="submit" name="Sign Up" value="Login"/>
+				</center>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+</form>
+{% endblock %}

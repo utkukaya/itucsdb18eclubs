@@ -1,0 +1,40 @@
+{% extends "server.html" %}
+{% block title %}Club list{% endblock %}
+{% block content %}
+    <h1 class="title">Club</h1>
+    <center>
+    <table>
+	<tr>
+	<td>
+	Name
+	</td>
+	<td>
+	Founder
+	</td>
+	</tr>
+    </table>
+    </center>
+    {% if club %}
+    
+	<center>
+	<form class="form-style-10" action="" method="post" name="club_list">
+	<table class="table is-striped is-fullwidth">
+      <tr>
+         <td>Name</td>
+         <td>Founder</td>
+         <td>Club Id</td>
+         <td>Number of Members</td>
+      </tr>
+      <tr>
+         <td>{{ club.name }}</td>
+         <td>{{ club.founder }}</td>
+         <td>{{ club.club_id }}</td>
+         <td>{{ club.number_member }}</td>
+      </tr>
+	</table>
+	</form>
+   	</center>
+
+
+    {% endif %}
+{% endblock %}
