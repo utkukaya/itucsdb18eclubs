@@ -3,11 +3,12 @@ from flask_login import UserMixin
 import sqlite3 as dbapi2
 import psycopg2
 from passlib.hash import pbkdf2_sha256 as hasher
-
+import os
 
 from flask import Flask, g, jsonify
 from psycopg2 import pool
 
+url = os.getenv("DATABASE_URL")
 
 
 class Comment:

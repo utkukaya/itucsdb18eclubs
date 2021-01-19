@@ -4,6 +4,7 @@ import psycopg2
 from user import User, Account, Enrollment, Event, Comment
 from flask_login import current_user
 from event import Event
+import os
 
 enrollment_key = 0
 enrollment_event_key = 0
