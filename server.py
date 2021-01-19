@@ -13,9 +13,9 @@ from views import eclub_page, register_page, register_club_page
 #import views
 import forms
 app = Flask(__name__)
-app.secret_key = "super secret key"
-url = os.getenv("DATABASE_URL")
-lm = LoginManager()
+#app.secret_key = "super secret key"
+#url = os.getenv("DATABASE_URL")
+#lm = LoginManager()
 #lm.init_app(app)
 
 @lm.user_loader
@@ -55,12 +55,12 @@ def create_app():
     #db = Database(os.path.join(home_dir, "clubs.db"))
     #app.config["db"] = db
     return app
-
+ 
 
 if __name__ == "__main__":
     app = create_app()
     port = app.config.get("PORT", 5000)
-    app.run(host="127.0.0.0", port=port)
+    app.run(host="127.0.0.1", port=port,Debug=True)
     
     
 
