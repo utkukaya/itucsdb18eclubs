@@ -74,12 +74,7 @@ class User(UserMixin):
 
 def user_get(student_email):
         
-    connection = psycopg2.connect(
-            database="Database",
-            user="postgres",
-            host="localhost",
-            password="utku"
-            )
+    connection = psycopg2.connect(url)
     cursor = connection.cursor()
     #cursor = psycopg2.connect("dbname=suppliers user=postgres password=postgres")
     query = """SELECT STUDENT_ID, FIRSTNAME, SURNAME, EMAIL, DEPARTMENT, PASSWORD FROM "STUDENT" WHERE (EMAIL = (%s))"""
@@ -90,12 +85,7 @@ def user_get(student_email):
 
 def user_get_club(club_email):
         
-    connection = psycopg2.connect(
-            database="Database",
-            user="postgres",
-            host="localhost",
-            password="utku"
-            )
+    connection = psycopg2.connect(url)
     cursor = connection.cursor()
     #cursor = psycopg2.connect("dbname=suppliers user=postgres password=postgres")
     query = """SELECT CLUB_ID, NAME, FOUNDER, NUMBER_MEMBER, EMAIL, PASSWORD FROM "CLUBS" WHERE (EMAIL = (%s))"""
@@ -107,12 +97,7 @@ def user_get_club(club_email):
 def is_user(given_email):
 
     #with dbapi2.connect(dbfile) as connection:
-        connection = psycopg2.connect(
-            database="Database",
-            user="postgres",
-            host="localhost",
-            password="utku"
-            )
+        connection = psycopg2.connect(url)
         cursor = connection.cursor()
     #                query = """SELECT * FROM "STUDENT" WHERE (email= (%s)) AND (password = (%s))"""
               
@@ -143,12 +128,7 @@ def get_user(user_id):
     
 def update_user(self, user_key, student):
     with dbapi2.connect(self.dbfile) as connection:
-        connection = psycopg2.connect(
-            database="Database",
-            user="postgres",
-            host="localhost",
-            password="utku"
-            )
+        connection = psycopg2.connect(url)
         cursor = connection.cursor()
             #cursor = psycopg2.connect("dbname=suppliers user=postgres password=utku")
             
@@ -158,12 +138,7 @@ def update_user(self, user_key, student):
         
 def delete_user(self, user_key):
         with dbapi2.connect(self.dbfile) as connection:
-            connection = psycopg2.connect(
-                  database="Database",
-                  user="postgres",
-                  host="localhost",
-                  password="utku"
-                  )
+            connection = psycopg2.connect(url)
             cursor = connection.cursor()
             #cursor = psycopg2.connect("dbname=suppliers user=postgres password=utku")
             
@@ -172,12 +147,7 @@ def delete_user(self, user_key):
             connection.commit()
     
 def get_user_club(given_email):
-        connection = psycopg2.connect(
-            database="Database",
-            user="postgres",
-            host="localhost",
-            password="utku"
-            )
+        connection = psycopg2.connect(url)
         cursor = connection.cursor()              
         query = """SELECT PASSWORD FROM "CLUBS" WHERE (email= (%s))"""
         cursor.execute(query,(given_email,))

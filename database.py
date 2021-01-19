@@ -19,8 +19,7 @@ class Database:
         
     def add_enrollment(self, student_id, club_id):
         
-        connection = psycopg2.connect(url
-            )
+        connection = psycopg2.connect(url)
         cursor = connection.cursor()
         global enrollment_key
         #enroll = Enrollment(student_id, club_id)
@@ -34,12 +33,7 @@ class Database:
     def get_enrollments(self, student_id):
        # with dbapi2.connect(self.dbfile) as connection:
         enrollments=[]
-        connection = psycopg2.connect(
-            database="Database",
-            user="postgres",
-            host="localhost",
-            password="utku"
-            )
+        connection = psycopg2.connect(url)
         cursor = connection.cursor()
         #cursor = psycopg2.connect("dbname=suppliers user=postgres password=postgres")
         query = """SELECT ENROLLMENT_ID, STUDENT_ID, CLUB_ID FROM "ENROLLMENT" WHERE (STUDENT_ID = (%s))"""
@@ -53,12 +47,7 @@ class Database:
 
 
     def add_enrollment_event(self, student_id, event_id):
-        connection = psycopg2.connect(
-            database="Database",
-            user="postgres",
-            host="localhost",
-            password="utku"
-            )
+        connection = psycopg2.connect(url)
         cursor = connection.cursor()
         global enrollment_event_key
         #enroll = Enrollment(student_id, club_id)
@@ -70,12 +59,7 @@ class Database:
         return enrollment_event_key 
     
     def check_enrollment_event(self, student_id, event_id):
-        connection = psycopg2.connect(
-            database="Database",
-            user="postgres",
-            host="localhost",
-            password="utku"
-            )
+        connection = psycopg2.connect(url)
         cursor = connection.cursor()
         query = """SELECT ENROLLMENT_EVENT_ID, STUDENT_ID, EVENT_ID FROM "ENROLLMENT_EVENT" WHERE (STUDENT_ID = (%s) AND EVENT_ID = (%s))"""
         cursor.execute(query, (student_id, event_id))
@@ -86,12 +70,7 @@ class Database:
         return 0
     
     def check_enrollment(self, student_id, club_id):
-        connection = psycopg2.connect(
-            database="Database",
-            user="postgres",
-            host="localhost",
-            password="utku"
-            )
+        connection = psycopg2.connect(url)
         cursor = connection.cursor()
         query = """SELECT ENROLLMENT_ID, STUDENT_ID, CLUB_ID FROM "ENROLLMENT" WHERE (STUDENT_ID = (%s) AND CLUB_ID = (%s))"""
         cursor.execute(query, (student_id, club_id))
@@ -105,12 +84,7 @@ class Database:
     def get_enrollments_event(self, student_id):
        # with dbapi2.connect(self.dbfile) as connection:
         enrollments_event=[]
-        connection = psycopg2.connect(
-            database="Database",
-            user="postgres",
-            host="localhost",
-            password="utku"
-            )
+        connection = psycopg2.connect(url)
         cursor = connection.cursor()
         #cursor = psycopg2.connect("dbname=suppliers user=postgres password=postgres")
         query = """SELECT ENROLLMENT_EVENT_ID, STUDENT_ID, EVENT_ID FROM "ENROLLMENT_EVENT" WHERE (STUDENT_ID = (%s))"""
@@ -122,12 +96,7 @@ class Database:
 
 
     def add_comment(self, comment, name, vote, event_id):
-        connection = psycopg2.connect(
-            database="Database",
-            user="postgres",
-            host="localhost",
-            password="utku"
-            )
+        connection = psycopg2.connect(url)
         cursor = connection.cursor()
         global comment_key
         #enroll = Enrollment(student_id, club_id)
@@ -140,12 +109,7 @@ class Database:
 
 
     def get_comment(self, comment_key):
-        connection = psycopg2.connect(
-            database="Database",
-            user="postgres",
-            host="localhost",
-            password="utku"
-            )
+        connection = psycopg2.connect(url)
         cursor = connection.cursor()
         #cursor = psycopg2.connect("dbname=suppliers user=postgres password=postgres")
         query = """SELECT COMMENT_ID, COMMENT, NAME, VOTE, EVENT_ID FROM "COMMENT" WHERE (COMMENT_ID = (%s))"""
@@ -158,12 +122,7 @@ class Database:
     def get_comments(self,event_key):
         comments = []
         #with dbapi2.connect(self.dbfile) as connection:
-        connection = psycopg2.connect(
-            database="Database",
-            user="postgres",
-            host="localhost",
-            password="utku"
-            )
+        connection = psycopg2.connect(url)
         cursor = connection.cursor()
         #cursor = psycopg2.connect("dbname=suppliers user=postgres password=utku")
         query = """SELECT COMMENT_ID, COMMENT, NAME, VOTE FROM "COMMENT" WHERE (EVENT_ID = (%s))"""
@@ -176,12 +135,7 @@ class Database:
     
     def update_comment(self, comment_key, comment):
         with dbapi2.connect(self.dbfile) as connection:
-            connection = psycopg2.connect(
-                  database="Database",
-                  user="postgres",
-                  host="localhost",
-                  password="utku"
-                  )
+            connection = psycopg2.connect(url)
             cursor = connection.cursor()
             #cursor = psycopg2.connect("dbname=suppliers user=postgres password=utku")
             
@@ -191,12 +145,7 @@ class Database:
     
     def delete_comment(self, comment_key):
         with dbapi2.connect(self.dbfile) as connection:
-            connection = psycopg2.connect(
-                  database="Database",
-                  user="postgres",
-                  host="localhost",
-                  password="utku"
-                  )
+            connection = psycopg2.connect(url)
             cursor = connection.cursor()
             #cursor = psycopg2.connect("dbname=suppliers user=postgres password=utku")
             
@@ -207,12 +156,7 @@ class Database:
 
     def add_event(self, title, date, location):
         with dbapi2.connect(self.dbfile) as connection:
-            connection = psycopg2.connect(
-                  database="Database",
-                  user="postgres",
-                  host="localhost",
-                  password="utku"
-                  )
+            connection = psycopg2.connect(url)
             cursor = connection.cursor()
             global event_key 
             event_key = event_key + 1
@@ -225,12 +169,7 @@ class Database:
        
     def get_event(self, event_key):
        # with dbapi2.connect(self.dbfile) as connection:
-        connection = psycopg2.connect(
-            database="Database",
-            user="postgres",
-            host="localhost",
-            password="utku"
-            )
+        connection = psycopg2.connect(url)
         cursor = connection.cursor()
         #cursor = psycopg2.connect("dbname=suppliers user=postgres password=postgres")
         query = """SELECT EVENT_ID, TITLE, DATE, LOCATION FROM "EVENTS" WHERE (EVENT_ID = (%s))"""
@@ -242,12 +181,7 @@ class Database:
     def get_events(self):
         events = []
         #with dbapi2.connect(self.dbfile) as connection:
-        connection = psycopg2.connect(
-            database="Database",
-            user="postgres",
-            host="localhost",
-            password="utku"
-            )
+        connection = psycopg2.connect(url)
         cursor = connection.cursor()
         #cursor = psycopg2.connect("dbname=suppliers user=postgres password=utku")
         query = """SELECT EVENT_ID, TITLE, DATE, LOCATION FROM "EVENTS" ORDER BY EVENT_ID"""
@@ -260,12 +194,7 @@ class Database:
     
     def update_event(self, event_key, event):
         with dbapi2.connect(self.dbfile) as connection:
-            connection = psycopg2.connect(
-                  database="Database",
-                  user="postgres",
-                  host="localhost",
-                  password="utku"
-                  )
+            connection = psycopg2.connect(url)
             cursor = connection.cursor()
             #cursor = psycopg2.connect("dbname=suppliers user=postgres password=utku")
             
@@ -275,12 +204,7 @@ class Database:
     
     def delete_event(self, event_key):
         with dbapi2.connect(self.dbfile) as connection:
-            connection = psycopg2.connect(
-                  database="Database",
-                  user="postgres",
-                  host="localhost",
-                  password="utku"
-                  )
+            connection = psycopg2.connect(url)
             cursor = connection.cursor()
             #cursor = psycopg2.connect("dbname=suppliers user=postgres password=utku")
             
@@ -292,12 +216,7 @@ class Database:
     
     def add_club(self, club):
         with dbapi2.connect(self.dbfile) as connection:
-            connection = psycopg2.connect(
-                  database="Database",
-                  user="postgres",
-                  host="localhost",
-                  password="utku"
-                  )
+            connection = psycopg2.connect(url)
             cursor = connection.cursor()
             #cursor = psycopg2.connect("dbname=suppliers user=postgres password=utku")
             query = """INSERT INTO "CLUBS" VALUES (club.name, club.founder, club.number_member, club.email, club.password)"""
@@ -308,12 +227,7 @@ class Database:
     
     def update_club(self, club_key, club):
         with dbapi2.connect(self.dbfile) as connection:
-            connection = psycopg2.connect(
-                  database="Database",
-                  user="postgres",
-                  host="localhost",
-                  password="utku"
-                  )
+            connection = psycopg2.connect(url)
             cursor = connection.cursor()
             #cursor = psycopg2.connect("dbname=suppliers user=postgres password=utku")
             
@@ -324,12 +238,7 @@ class Database:
             
     def update_number_members_club(self, club_key, club):
         with dbapi2.connect(self.dbfile) as connection:
-            connection = psycopg2.connect(
-                  database="Database",
-                  user="postgres",
-                  host="localhost",
-                  password="utku"
-                  )
+            connection = psycopg2.connect(url)
             cursor = connection.cursor()
             query = """SELECT NUMBER_MEMBER FROM "CLUBS" WHERE (CLUB_ID = (%s))"""
             cursor.execute(query, (club_key,))
@@ -345,12 +254,7 @@ class Database:
     
     def delete_club(self, club_key):
         with dbapi2.connect(self.dbfile) as connection:
-            connection = psycopg2.connect(
-                  database="Database",
-                  user="postgres",
-                  host="localhost",
-                  password="utku"
-                  )
+            connection = psycopg2.connect(url)
             cursor = connection.cursor()
             #cursor = psycopg2.connect("dbname=suppliers user=postgres password=utku")
             
@@ -360,12 +264,7 @@ class Database:
             
     def get_club(self, club_key):
        # with dbapi2.connect(self.dbfile) as connection:
-        connection = psycopg2.connect(
-            database="Database",
-            user="postgres",
-            host="localhost",
-            password="utku"
-            )
+        connection = psycopg2.connect(url)
         cursor = connection.cursor()
         #cursor = psycopg2.connect("dbname=suppliers user=postgres password=postgres")
         query = """SELECT CLUB_ID, NAME, FOUNDER, NUMBER_MEMBER, EMAIL, PASSWORD, IMAGE FROM "CLUBS" WHERE (CLUB_ID = (%s))"""
@@ -377,12 +276,7 @@ class Database:
     def get_clubs(self):
         clubs = []
         #with dbapi2.connect(self.dbfile) as connection:
-        connection = psycopg2.connect(
-            database="Database",
-            user="postgres",
-            host="localhost",
-            password="utku"
-            )
+        connection = psycopg2.connect(url)
         cursor = connection.cursor()
         #cursor = psycopg2.connect("dbname=suppliers user=postgres password=utku")
         query = """SELECT CLUB_ID, NAME, FOUNDER, NUMBER_MEMBER, EMAIL, PASSWORD FROM "CLUBS" ORDER BY CLUB_ID"""
@@ -397,12 +291,7 @@ class Database:
     
     def is_register_available_club(self, given_email, given_name):
          with dbapi2.connect(self.dbfile) as connection:
-                connection = psycopg2.connect(
-                      database="Database",
-                      user="postgres",
-                      host="localhost",
-                      password="utku"
-                      )
+                connection = psycopg2.connect(url)
                 cursor = connection.cursor()
                 query = """SELECT EMAIL FROM "CLUBS" WHERE (email = (%s))"""
                 cursor.execute(query, (given_email,))
@@ -411,12 +300,7 @@ class Database:
     
     def do_register_club(self, name, founder, number_member, email, password):
          with dbapi2.connect(self.dbfile) as connection:
-                connection = psycopg2.connect(
-                      database="Database",
-                      user="postgres",
-                      host="localhost",
-                      password="utku"
-                      )
+                connection = psycopg2.connect(url)
                 cursor = connection.cursor()
                 global club_user_key 
                 club_user_key = club_user_key + 1 
@@ -428,12 +312,7 @@ class Database:
     
     def is_register_available(self, given_email, given_name):
          with dbapi2.connect(self.dbfile) as connection:
-                connection = psycopg2.connect(
-                      database="Database",
-                      user="postgres",
-                      host="localhost",
-                      password="utku"
-                      )
+                connection = psycopg2.connect(url)
                 cursor = connection.cursor()
                 query = """SELECT EMAIL, FIRSTNAME FROM "STUDENT" WHERE (email = (%s)) AND (firstname = (%s))"""
                 cursor.execute(query, (given_email, given_name))
@@ -442,12 +321,7 @@ class Database:
      
     def do_register(self, firstname, surname, email, department, password):
          with dbapi2.connect(self.dbfile) as connection:
-                connection = psycopg2.connect(
-                      database="Database",
-                      user="postgres",
-                      host="localhost",
-                      password="utku"
-                      )
+                connection = psycopg2.connect(url)
                 cursor = connection.cursor()
                 global student_user_key
                 student_user_key = student_user_key + 1
