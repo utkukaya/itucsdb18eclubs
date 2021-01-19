@@ -18,7 +18,7 @@ app = Flask(__name__)
 #lm = LoginManager()
 #lm.init_app(app)
 
-@lm.user_loader
+#@lm.user_loader
 def load_user(user_id):
     return get_user(user_id)
 
@@ -48,8 +48,8 @@ def create_app():
     )
     app.add_url_rule("/registerstudent", view_func=register_page, methods=["GET", "POST"])
     app.add_url_rule("/registerclub", view_func=register_club_page, methods=["GET", "POST"])
-    lm.init_app(app)
-    lm.login_view = "login_page"
+    #lm.init_app(app)
+    #l#m.login_view = "login_page"
 
     #home_dir = os.path.expanduser("~")
     #db = Database(os.path.join(home_dir, "clubs.db"))
@@ -60,7 +60,7 @@ def create_app():
 if __name__ == "__main__":
     app = create_app()
     port = app.config.get("PORT", 5000)
-    app.run(host="127.0.0.1", port=port,Debug=True)
+    app.run(host="127.0.0.1", port=port,debug=True)
     
     
 
