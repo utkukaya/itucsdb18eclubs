@@ -140,6 +140,37 @@ def get_user(user_id):
             user.is_admin = user.email in current_app.config["ADMIN_USERS"]
         return user
     
+    
+def update_user(self, user_key, student):
+    with dbapi2.connect(self.dbfile) as connection:
+        connection = psycopg2.connect(
+            database="Database",
+            user="postgres",
+            host="localhost",
+            password="utku"
+            )
+        cursor = connection.cursor()
+            #cursor = psycopg2.connect("dbname=suppliers user=postgres password=utku")
+            
+        query = """UPDATE "STUDENT" SET STUDENT_ID = (%s), FIRSTNAME = (%s), SURNAME = (%s) , EMAIL = (%s), DEPARTMENT = (%s)İ PASSWORD = (%S) WHERE (STUDENT_ID = (%s))"""
+        cursor.execute(query, (student.student_id, student.firstname, student.surname, student.email, student.department, student.password ,user_key))
+        connection.commit()
+        
+def delete_user(self, user_key):
+        with dbapi2.connect(self.dbfile) as connection:
+            connection = psycopg2.connect(
+                  database="Database",
+                  user="postgres",
+                  host="localhost",
+                  password="utku"
+                  )
+            cursor = connection.cursor()
+            #cursor = psycopg2.connect("dbname=suppliers user=postgres password=utku")
+            
+            query = """DELETE FROM "STUDENT" WHERE (STUDENT_ID = (%s))"""
+            cursor.execute(query, (user_key,))
+            connection.commit()
+    
 def get_user_club(given_email):
         connection = psycopg2.connect(
             database="Database",
