@@ -7,6 +7,7 @@ from user import get_user
 from os.path import expanduser
 from pathlib import Path
 import os
+from views import home_page
 import views
 import forms
 app = Flask(__name__)
@@ -25,7 +26,7 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object("config")
 
-    app.add_url_rule("/", view_func=views.home_page)
+    app.add_url_rule("/", view_func=home_page)
     app.add_url_rule("/events", view_func=views.eclubs_page, methods=["GET", "POST"])
     app.add_url_rule("/account", view_func=views.account_page, methods=["GET", "POST"])
     app.add_url_rule("/addevent", view_func=views.add_event_page, methods=["GET", "POST"])
