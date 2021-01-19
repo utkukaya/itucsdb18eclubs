@@ -4,4 +4,4 @@ app=Flask(__name__)
 def home(): 
     return“Website content goes here.” 
     if __name__ ==’__main__’: 
-        app.run(debug=True)
+        app.run()
