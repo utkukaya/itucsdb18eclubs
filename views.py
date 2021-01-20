@@ -6,13 +6,13 @@ from flask import request, redirect, url_for, flash
 from flask_login import current_user
 from club import Club
 from flask_login import UserMixin, LoginManager, logout_user, login_user, current_user, login_required
-from user import get_user, is_user, get_user_club, user_get, user_get_club
+from user import get_user, is_user, get_user_club, user_get, user_get_club, delete_user
 from user import User
 from event import Event
 from forms import LoginForm
 from passlib.hash import pbkdf2_sha256 as hasher
 from passlib.hash import sha256_crypt
-from wtforms import Form, BooleanField, TextField, PasswordField, validators, IntegerField, DateField, DateTimeField, TextAreaField
+from wtforms import Form, BooleanField, TextField, PasswordField, validators, IntegerField, DateField, TextAreaField
 from os.path import expanduser
 import os
 import psycopg2
@@ -39,6 +39,24 @@ def club_edit_page():
     
     
     
+def delete_club_page():
+    db = current_app.config["db"]
+    club_key = request.args.get('club_key')
+    db.delete_club(club_key)
+    global club_user
+    club_user = False
+    return render_template("home.html", user_email=user_email, club_user=club_user, student_user=student_user)
+        
+def delete_student_page():
+    #db = current_app.config["db"]
+    student_key = request.args.get('student_key')
+    delete_user(student_key)
+    global student_user
+    student_user = True
+    return render_template("home.html", user_email=user_email, club_user=club_user, student_user=student_user)
+
+
+
 
 class CommentForm(Form): 
 
@@ -134,6 +152,8 @@ def account_page():
     db = current_app.config["db"]
     #club_key = 1
     email_user = request.args.get('user_email')
+   # is_student = request.args.get('student_user')
+    #is_club = request.args.get('club_user')
     user = None
     clubs = []
     events = []
@@ -156,8 +176,10 @@ def account_page():
                 events_name = db.get_event(enrollments_events[index])
                 events.append(events_name)
                 index = index+1
+       # return render_template("account.html", user=user, user_email = user_email, club_user=club_user, student_user=student_user, clubs=clubs, events=events)
+
         if club_user: 
-            user = user_get_club(email_user)  
+            user = user_get_club(email_user)
         user_email = email_user
 #    return redirect(url_for("a_club.html", club=club))
     return render_template("account.html", user=user, user_email = user_email, club_user=club_user, student_user=student_user, clubs=clubs, events=events)
@@ -337,7 +359,7 @@ def logout_page():
     global user_email
     user_email = ""
     flash("You have logged out.")
-    return redirect(url_for("home_page"))
+    return redirect(url_for("home_page", student_user = student_user))
 
 def login_clubs_page():
     db = current_app.config["db"]
@@ -374,7 +396,7 @@ def logout_club_page():
     global club_user
     club_user = False
     flash("You have logged out.")
-    return redirect(url_for("home_page"))
+    return redirect(url_for("home_page", club_user = club_user))
     
 #def login_page():
  #   form = LoginForm()
@@ -428,7 +450,7 @@ class RegistrationFormClubs(Form):
     name = TextField('Name', [validators.Length(min=1, max=20)]) 
     founder = TextField('Founder', [validators.Length(min=1, max=50)])
     number_member = IntegerField('Number of Club Members', [validators.NumberRange(min=0, max=10000)])
-    email = TextField('Email Adress', [validators.Length(min=6, max=50)])
+    email = TextField('Email', [validators.Length(min=1, max=200)])
     password = PasswordField('New Password', [
         validators.Required()
         #validators.EqualTo('confirm', message='Passwords must match')

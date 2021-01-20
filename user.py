@@ -3,12 +3,11 @@ from flask_login import UserMixin
 import sqlite3 as dbapi2
 import psycopg2
 from passlib.hash import pbkdf2_sha256 as hasher
-import os
+
 
 from flask import Flask, g, jsonify
 from psycopg2 import pool
 
-url = os.getenv("DATABASE_URL")
 
 
 class Comment:
@@ -70,12 +69,29 @@ class User(UserMixin):
     def is_active(self):
         return self.active
     
+def delete_user(student_key):    
+    connection = psycopg2.connect(
+        database="Database",
+        user="postgres",
+        host="localhost",
+        password="utku"
+        )
+    cursor = connection.cursor()
+    #cursor = psycopg2.connect("dbname=suppliers user=postgres password=utku")
+    query = """DELETE FROM "STUDENT" WHERE (STUDENT_ID = (%s))"""
+    cursor.execute(query, (student_key,))
+    connection.commit()
 
 
 
 def user_get(student_email):
         
-    connection = psycopg2.connect(url)
+    connection = psycopg2.connect(
+            database="Database",
+            user="postgres",
+            host="localhost",
+            password="utku"
+            )
     cursor = connection.cursor()
     #cursor = psycopg2.connect("dbname=suppliers user=postgres password=postgres")
     query = """SELECT STUDENT_ID, FIRSTNAME, SURNAME, EMAIL, DEPARTMENT, PASSWORD FROM "STUDENT" WHERE (EMAIL = (%s))"""
@@ -86,7 +102,12 @@ def user_get(student_email):
 
 def user_get_club(club_email):
         
-    connection = psycopg2.connect(url)
+    connection = psycopg2.connect(
+            database="Database",
+            user="postgres",
+            host="localhost",
+            password="utku"
+            )
     cursor = connection.cursor()
     #cursor = psycopg2.connect("dbname=suppliers user=postgres password=postgres")
     query = """SELECT CLUB_ID, NAME, FOUNDER, NUMBER_MEMBER, EMAIL, PASSWORD FROM "CLUBS" WHERE (EMAIL = (%s))"""
@@ -98,7 +119,12 @@ def user_get_club(club_email):
 def is_user(given_email):
 
     #with dbapi2.connect(dbfile) as connection:
-        connection = psycopg2.connect(url)
+        connection = psycopg2.connect(
+            database="Database",
+            user="postgres",
+            host="localhost",
+            password="utku"
+            )
         cursor = connection.cursor()
     #                query = """SELECT * FROM "STUDENT" WHERE (email= (%s)) AND (password = (%s))"""
               
@@ -126,29 +152,13 @@ def get_user(user_id):
             user.is_admin = user.email in current_app.config["ADMIN_USERS"]
         return user
     
-    
-def update_user(self, user_key, student):
-    with dbapi2.connect(self.dbfile) as connection:
-        connection = psycopg2.connect(url)
-        cursor = connection.cursor()
-            #cursor = psycopg2.connect("dbname=suppliers user=postgres password=utku")
-            
-        query = """UPDATE "STUDENT" SET STUDENT_ID = (%s), FIRSTNAME = (%s), SURNAME = (%s) , EMAIL = (%s), DEPARTMENT = (%s)İ PASSWORD = (%S) WHERE (STUDENT_ID = (%s))"""
-        cursor.execute(query, (student.student_id, student.firstname, student.surname, student.email, student.department, student.password ,user_key))
-        connection.commit()
-        
-def delete_user(self, user_key):
-        with dbapi2.connect(self.dbfile) as connection:
-            connection = psycopg2.connect(url)
-            cursor = connection.cursor()
-            #cursor = psycopg2.connect("dbname=suppliers user=postgres password=utku")
-            
-            query = """DELETE FROM "STUDENT" WHERE (STUDENT_ID = (%s))"""
-            cursor.execute(query, (user_key,))
-            connection.commit()
-    
 def get_user_club(given_email):
-        connection = psycopg2.connect(url)
+        connection = psycopg2.connect(
+            database="Database",
+            user="postgres",
+            host="localhost",
+            password="utku"
+            )
         cursor = connection.cursor()              
         query = """SELECT PASSWORD FROM "CLUBS" WHERE (email= (%s))"""
         cursor.execute(query,(given_email,))

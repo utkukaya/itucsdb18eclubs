@@ -7,18 +7,13 @@ from user import get_user
 from os.path import expanduser
 from pathlib import Path
 import os
-from views import home_page, eclubs_page, account_page, add_event_page, an_event_page, register_event_page
-from views import events_page, join_page, login_page, login_clubs_page, logout_page, about_page, club_add_page
-from views import eclub_page, register_page, register_club_page
-#import views
+import views
 import forms
 app = Flask(__name__)
-#app.secret_key = "super secret key"
-#url = os.getenv("DATABASE_URL")
-#lm = LoginManager()
+lm = LoginManager()
 #lm.init_app(app)
 
-#@lm.user_loader
+@lm.user_loader
 def load_user(user_id):
     return get_user(user_id)
 
@@ -26,41 +21,56 @@ def load_user(user_id):
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object("config")
+    app.config.from_object("settings")
 
-    app.add_url_rule("/", view_func=home_page)
-    app.add_url_rule("/eclubs", view_func=eclubs_page, methods=["GET", "POST"])
-    app.add_url_rule("/account", view_func=account_page, methods=["GET", "POST"])
-    app.add_url_rule("/addevent", view_func=add_event_page, methods=["GET", "POST"])
-    app.add_url_rule("/anevent", view_func=an_event_page, methods=["GET", "POST"])
-    app.add_url_rule("/registeredevent", view_func=register_event_page, methods=["GET", "POST"])
-    app.add_url_rule("/events", view_func=events_page, methods=["GET", "POST"])
-    app.add_url_rule("/joined", view_func=join_page, methods=["GET", "POST"])
-    app.add_url_rule("/loginstudent", view_func=login_page, methods=["GET", "POST"])
-    app.add_url_rule("/loginclub", view_func=login_clubs_page, methods=["GET", "POST"])
-    app.add_url_rule("/logout", view_func=logout_page)
-    app.add_url_rule("/about", view_func=about_page)
+    app.add_url_rule("/", view_func=views.home_page)
+    app.add_url_rule("/events", view_func=views.eclubs_page, methods=["GET", "POST"])
+    app.add_url_rule("/account", view_func=views.account_page, methods=["GET", "POST"])
+    app.add_url_rule("/addevent", view_func=views.add_event_page, methods=["GET", "POST"])
+    app.add_url_rule("/anevent", view_func=views.an_event_page, methods=["GET", "POST"])
+    app.add_url_rule("/registeredevent", view_func=views.register_event_page, methods=["GET", "POST"])
+    app.add_url_rule("/eclubs", view_func=views.events_page, methods=["GET", "POST"])
+    app.add_url_rule("/joined", view_func=views.join_page, methods=["GET", "POST"])
+    app.add_url_rule("/loginstudent", view_func=views.login_page, methods=["GET", "POST"])
+    app.add_url_rule("/loginclub", view_func=views.login_clubs_page, methods=["GET", "POST"])
+    app.add_url_rule("/logout", view_func=views.logout_page)
+    app.add_url_rule("/about", view_func=views.about_page)
+    app.add_url_rule("/deleteaccount", view_func=views.delete_club_page, methods=["GET", "POST"])
+    app.add_url_rule("/deletestudentaccount", view_func=views.delete_student_page, methods=["GET", "POST"])
+
     #app.add_url_rule("/eclub", view_func=views.eclub_page)
     app.add_url_rule(
-        "/new-club", view_func=club_add_page, methods=["GET", "POST"])
+        "/new-club", view_func=views.club_add_page, methods=["GET", "POST"])
     app.add_url_rule(
-        "/eclub", view_func=eclub_page, methods=["GET", "POST"]
+        "/eclub", view_func=views.eclub_page, methods=["GET", "POST"]
     )
-    app.add_url_rule("/registerstudent", view_func=register_page, methods=["GET", "POST"])
-    app.add_url_rule("/registerclub", view_func=register_club_page, methods=["GET", "POST"])
-    #lm.init_app(app)
-    #l#m.login_view = "login_page"
+    app.add_url_rule("/registerstudent", view_func=views.register_page, methods=["GET", "POST"])
+    app.add_url_rule("/registerclub", view_func=views.register_club_page, methods=["GET", "POST"])
+    #@app.route('/register/', methods=["GET","POST"])
+  #  db = Database()
+ #   db.add_club(Club("IEEE", "UTKU"))
+#    db.add_club(Club("Dance", "UMUT"))
+#    app.config["db"] = db
+    lm.init_app(app)
+    lm.login_view = "login_page"
 
-    #home_dir = os.path.expanduser("~")
-    #db = Database(os.path.join(home_dir, "clubs.db"))
-    #app.config["db"] = db
+    home_dir = os.path.expanduser("~")
+    db = Database(os.path.join(home_dir, "clubs.db"))
+    app.config["db"] = db
+
+
+    
+    
+#    db = Database()
+ #   app.config["db"] = db,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,üüüüüüüüüüüü9666
+    
     return app
- 
+
 
 if __name__ == "__main__":
     app = create_app()
     port = app.config.get("PORT", 5000)
-    app.run(host="127.0.0.1", port=port)
+    app.run(host="0.0.0.0", port=port)
     
     
 

@@ -81,18 +81,6 @@
         </p>
     {% endfor %}
 	</div>
-	<div class="section">
-	{{ form.password(required=True, autofocus=True,
-                                     class='input is-large',
-                                     placeholder='Repeat Your Password') }}
-	</div>
-	<div>
-	{% for error in form.password.errors %}
-        <p class="help has-background-warning">
-            {{ error }}
-        </p>
-    {% endfor %}
-	</div>
 	</div>
 	
 	

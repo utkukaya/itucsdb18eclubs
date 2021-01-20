@@ -5,7 +5,6 @@
     {% if user_email != "" %}
    
 	<center>
-	
 	<form class="form-style-10" action="" method="post" name="club_list">
 	<table class="table is-striped is-fullwidth">
       {% if student_user %}
@@ -23,16 +22,18 @@
 	  </tr>
 	  {% endif %}
 	  {% if club_user %}
+	  {% endif %}
+	  {% if club_user %}
 	  <tr>
-         <td><div class="change-button-color">Your Firstname: </div></td>
+         <td><div class="change-button-color">Club Name: </div></td>
          <td>{{ user.name }}</td>
 	  </tr>
 	  <tr>
-		 <td><div class="change-button-color">Your Surname: </div></td>
+		 <td><div class="change-button-color">Club Founder: </div></td>
 		 <td>{{ user.founder }}</td>
       </tr>
 	  <tr>
-		 <td><div class="change-button-color">Your Email: </div></td>
+		 <td><div class="change-button-color">Club Email </div></td>
          <td>{{ user.email }}</td>		 
 	  </tr>
 	  {% endif %}
@@ -78,6 +79,25 @@
 		</div>
 	</form>
 	{% endif %}
+	{% if club_user %}
+	<form class="form-style-10" action="" method="post" name="club_list">
+		<div class="button-design">
+		<button>
+		  <a class="button-color" href="{{ url_for('delete_club_page', club_key=user.club_id) }}">Delete Your Account</a>
+		</button>
+		</div>
+	</form>
+	{% endif %}
+	{% if student_user %}
+	<form class="form-style-10" action="" method="post" name="club_list">
+		<div class="button-design">
+		<button>
+		  <a class="button-color" href="{{ url_for('delete_student_page', student_key=user.student_id) }}">Delete Your Account</a>
+		</button>
+		</div>
+	</form>
+	{% endif %}
+	
 	{% endif %}
 	{% if user_email != "" %}
 	

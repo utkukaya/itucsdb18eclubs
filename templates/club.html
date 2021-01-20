@@ -4,6 +4,8 @@
     <h1 class="title">Clubs</h1>
 
      <form class="form-style-10" action="" method="post" name="club_list">
+		
+		{% if clubs %}
 		<table class="table is-striped is-fullwidth">
 		<tr>
 			<td>
@@ -17,8 +19,6 @@
 			</a>
 			</td>
 		</tr>
-		{% if clubs %}
-	
 		
         {% for club_key, club in clubs %}
         <tr>
